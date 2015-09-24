@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherService
     private TextView temperatureTextView;
     private TextView conditionTextView;
     private TextView locationTextView;
+    private EditText editLocation;
 
     private YahooWeatherService service;
     private ProgressDialog dialog;
@@ -34,12 +37,15 @@ public class WeatherActivity extends AppCompatActivity implements WeatherService
         temperatureTextView = (TextView)findViewById(R.id.temperatureTextView);
         conditionTextView = (TextView)findViewById(R.id.conditiontextView);
         locationTextView = (TextView)findViewById(R.id.locationTextView);
+        editLocation = (EditText)findViewById(R.id.editLocation);
+
 
         service = new YahooWeatherService(this);
         dialog = new ProgressDialog(this);
         dialog.setMessage("Loading.....");
         dialog.show();
-        service.refreshWeather("Mikkeli, Finland");
+        service.refreshWeather("Mikkeli");
+
     }
 
     @Override
@@ -53,7 +59,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherService
         Drawable weatherIconDrawable = getResources().getDrawable(resourceId);
 
         weatherIconImageView.setImageDrawable(weatherIconDrawable);
-        temperatureTextView.setText(item.getCondition().getTemperature()+ "\u00b0" + channel.getUnits().getTemperature());
+        temperatureTextView.setText(item.getCondition().getTemperature() + "\u00b0" + channel.getUnits().getTemperature());
         conditionTextView.setText(item.getCondition().getDescription());
         locationTextView.setText(service.getLocation());
     }
@@ -62,5 +68,12 @@ public class WeatherActivity extends AppCompatActivity implements WeatherService
     public void serviceFailure(Exception ex) {
         dialog.hide();
         Toast.makeText(this, ex.getMessage(),Toast.LENGTH_LONG).show();
+    }
+    /** Called when the user touches the button */
+    public void sendLocation(View view) {
+        // Do something in response to button click
+        service.refreshWeather(String.valueOf(editLocation.getText()));
+
+
     }
 }

@@ -3,7 +3,8 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".WeatherActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".WeatherActivity"
+    android:background="@android:color/holo_blue_light">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -39,4 +40,28 @@
         android:id="@+id/locationTextView"
         android:layout_below="@+id/conditiontextView"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editLocation"
+        android:layout_below="@+id/locationTextView"
+        android:layout_marginTop="63dp"
+        android:layout_alignLeft="@+id/temperatureTextView"
+        android:layout_alignStart="@+id/temperatureTextView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="Tampere" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_weather"
+        android:id="@+id/button"
+        android:onClick="sendLocation"
+        android:layout_marginTop="48dp"
+        android:layout_below="@+id/editLocation"
+        android:layout_alignLeft="@+id/editLocation"
+        android:layout_alignStart="@+id/editLocation" />
+
 </RelativeLayout>
